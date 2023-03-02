@@ -1,0 +1,53 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Philhub</title>
+    <link rel="stylesheet" href="{% static "css/philhub.css" %}">
+
+<title>
+    {% block title %} {% endblock title %}
+</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href={% url 'show_page' %}>Home</a>
+                </li>
+                <li>
+                    <a href={% url 'show_works_page' %}>Published Works</a>
+                </li>
+                <li class="pink">
+                {% if user.is_authenticated %}
+                Hello, {{user.username}}
+                <a href={% url 'user_logout' %}>Logout</a>
+                <a href={% url 'show_works_form' %}>Upload</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href={% url 'signup' %}>Sign Up</a>
+                </li>
+
+                <li><a href={% url 'user_login' %}>Sign in</a></li>
+            
+                {% endif %}
+            </ul>
+        </nav>
+        <h1 id="header_h1">Welcome Philosophers!</h1>
+    </header>
+{% block content %}
+
+{% endblock content%}
+
+<footer> 
+    <p>Copyright Philhub 2023</p>
+    <p>By: Gabrielle Burgard</p>
+</footer>
+</body>

@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<main>
+<div class="grid">
+
+
+<div class="news">
+<h2 id="New">What's New?</h2>
+{%for news in news%}
+<h3>{{news.title}}</h3>
+<p>{{news.description}}</p>
+{% endfor %}
+</div>
+
+<div class="work">
+{% for works in works %}
+<h3>{{works.title}}</h3>
+<p>{{works.description}}</p>
+{% endfor %}
+</div>
+
+</div>
+</main>
+
+{% endblock content %}
+
