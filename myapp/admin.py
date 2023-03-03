@@ -1,6 +1,6 @@
 from django.contrib import admin
 from myapp.models import News
-from myapp.models import Work
+from myapp.models import Work, File
 # Register your models here.
 
 class NewsAdmin(admin.ModelAdmin):
@@ -19,4 +19,12 @@ class WorkAdmin(admin.ModelAdmin):
         "document"
     )
 admin.site.register(Work, NewsAdmin)
+
+class FileAdmin(admin.ModelAdmin):
+    list_display=(
+        "name",
+        "filepath",
+        "id"
+    )
+admin.site.register(File, FileAdmin)
 

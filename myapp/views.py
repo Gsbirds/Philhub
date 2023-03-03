@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import News
-from .models import Work
-from .forms import WorksForm
+from .models import Work, File
 from django.contrib.auth.decorators import login_required
 from .functions import handle_uploaded_file 
+from .forms import FileForm
 
 # Create your views here.
 def show_page(request):
@@ -39,3 +39,23 @@ def works_form(request):
         "form":form,
     }
     return render(request, "pages/create.html", context)
+
+def showfile(request):
+    files= File.objects.last()
+    filepath= files.filepath
+    filename= files.name
+
+    form= FileForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+
+    context= {
+            'filepath': filepath,
+              'form': form,
+              'filename': filename
+              }
+      
+    return render(request, 'pages/files.html', context)
+
+    def redirect_to_page(request):
+        return redirect("home")

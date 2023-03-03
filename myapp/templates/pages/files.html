@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<main>
+    
+
+<body>
+    <h1>Upload a document</h1>
+    <form enctype="multipart/form-data" method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Upload"/>
+    </form>
+    
+    <br><br>
+
+    <a href="{{ MEDIA_URL }}{{ filepath }}">{{ filename }}</a>
+
+    <br><br>
+
+    </body>
+
+</main>
+
+{% endblock content %}
