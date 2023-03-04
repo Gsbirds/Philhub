@@ -11,10 +11,18 @@ Home
 {% block content %}
 <main>
     
+    <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}">   
+     <input class="form-control mr-sm-2" type="search"  
+      placeholder="Search" aria-label="Search" name="search">    
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
 
-    <label for="search">Search Works:</label>
-    <input type="search" id="search" name="search">
-
+    {% for post in posts %}
+    <div>
+    <a href="{{ MEDIA_URL }}{{ post.filepath }}">{{ post.name }}</a>
+    </div>
+    {% endfor %}
+    </div>
 </main>
 
 {% endblock content %}

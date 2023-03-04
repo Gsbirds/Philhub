@@ -22,7 +22,7 @@
                     <a href={% url 'show_page' %}>Home</a>
                 </li>
                 <li>
-                    <a href={% url 'show_works_page' %}>Published Works</a>
+                    <a href={% url 'search' %}>Published Works</a>
                 </li>
                 <li class="pink">
                 {% if user.is_authenticated %}
@@ -35,7 +35,7 @@
                 <li>
                     <a href={% url 'signup' %}>Sign Up</a>
                 </li>
-
+            
                 <li><a href={% url 'user_login' %}>Sign in</a></li>
             
                 {% endif %}
