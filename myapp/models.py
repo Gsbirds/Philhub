@@ -22,4 +22,5 @@ class File(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
-   
+    def __str__(self):
+        return str(self.name)

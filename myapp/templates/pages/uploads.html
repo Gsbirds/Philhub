@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<main>
+
+<div class="news">
+<h2 id="New">Your Works</h2>
+{% for upload in uploads %}
+<div>
+<a href="{{ MEDIA_URL }}{{ upload.filepath }}">{{ upload.name }}</a>
+</div>
+{% endfor %}
+</div>
+
+</main>
+
+{% endblock content %}
+

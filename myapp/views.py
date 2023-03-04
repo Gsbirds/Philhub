@@ -41,21 +41,22 @@ def works_form(request):
     return render(request, "pages/create.html", context)
 
 def showfile(request):
-    files= File.objects.last()
-    filepath= files.filepath
-    filename= files.name
-
     form= FileForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
 
-    context= {
-            'filepath': filepath,
-              'form': form,
-              'filename': filename
+    context= { 
+              'form': form
               }
       
     return render(request, 'pages/files.html', context)
 
-    def redirect_to_page(request):
-        return redirect("home")
+def showuploads(request):
+    uploads= File.objects.filter(author=request.user)
+    context = {
+        "uploads":uploads,
+    }
+    return render(request,"pages/uploads.html",context )
+
+def redirect_to_page(request):
+    return redirect("home")
