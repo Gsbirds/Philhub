@@ -3,8 +3,10 @@ from .models import News
 from .models import Work, File
 from django.contrib.auth.decorators import login_required
 from .functions import handle_uploaded_file 
-from .forms import FileForm, SearchForm
-from django.db.models import Q  #
+from .forms import FileForm, ContactForm
+from django.db.models import Q 
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
 
 # Create your views here.
 def show_page(request):
@@ -53,7 +55,28 @@ def search_results(request):
         posts = File.objects.filter (name__icontains=search_post)
         print(posts)
     else:
-        posts=SearchForm()
+        posts = File.objects.all()
     
 
     return render(request, "pages/Published_works.html", {"posts":posts})   
+def contact(request):
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			subject = "Website Inquiry" 
+			body = {
+			'first_name': form.cleaned_data['first_name'], 
+			'last_name': form.cleaned_data['last_name'], 
+			'email': form.cleaned_data['email_address'], 
+			'message':form.cleaned_data['message'], 
+			}
+			message = "\n".join(body.values())
+
+			try:
+				send_mail(subject, message, 'gabbyburgard@gmail.com', ['gabbyburgard@gmail.com']) 
+			except BadHeaderError:
+				return HttpResponse('Invalid header found.')
+			return redirect ("show_page")
+      
+	form = ContactForm()
+	return render(request, "pages/contact.html", {'form':form})

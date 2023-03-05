@@ -24,6 +24,9 @@
                 <li>
                     <a href={% url 'search' %}>Published Works</a>
                 </li>
+                <li>
+                    <a href={% url 'contact' %}>Contact Us</a>
+                </li>
                 <li class="pink">
                 {% if user.is_authenticated %}
                 Hello, {{user.username}}
