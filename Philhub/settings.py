@@ -129,8 +129,8 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.mail.yahoo.com'
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'gabbyburgard@gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'gabbyburgard@yahoo.com'
 EMAIL_HOST_PASSWORD = 'Frankabu72*'

@@ -1,13 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import News
-from .models import Work, File
+from .models import Work, File, Notes
 from django.contrib.auth.decorators import login_required
 from .functions import handle_uploaded_file 
 from .forms import FileForm, ContactForm
-from django.db.models import Q 
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
-
+from .forms import textForm
 # Create your views here.
 def show_page(request):
     #get all recipes from recipes table
@@ -56,9 +55,48 @@ def search_results(request):
         print(posts)
     else:
         posts = File.objects.all()
-    
-
     return render(request, "pages/Published_works.html", {"posts":posts})   
+
+# def see_notes(request):
+#     notes= Notes.objects.all()
+#     context = {
+#         "notes": notes
+#     }
+#     return render(request,"pages/notes.html",context )
+def make_notes(request):
+    notes= Notes.objects.all()
+    if request.method=="POST":
+        form= textForm(request.POST)
+        if form.is_valid():
+            note=form.save(False)
+            note.author=request.user
+            note.save()
+            return redirect("make_notes")
+    else:
+        form = textForm()
+        
+    context= {
+        "form":form,
+        "notes": notes
+    }
+    return render(request, "pages/notes.html", context)
+
+def edit_post(request, id):
+    post=get_object_or_404(Notes, id=id)
+    # Get the object that we want to edit
+    if request.method == "POST":
+        form= textForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+        redirect('make_notes')
+    else:
+        form=textForm(instance=post)
+    context={
+         "post_object":post,
+         "post_form":form,
+    }
+    return render(request, "pages/edit.html",context)
+
 def contact(request):
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
@@ -73,7 +111,7 @@ def contact(request):
 			message = "\n".join(body.values())
 
 			try:
-				send_mail(subject, message, 'gabbyburgard@gmail.com', ['gabbyburgard@gmail.com']) 
+				send_mail(subject, message, 'gabbyburgard@yahoo.com', ['gabbyburgard@yahoo.com']) 
 			except BadHeaderError:
 				return HttpResponse('Invalid header found.')
 			return redirect ("show_page")

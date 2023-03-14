@@ -24,3 +24,16 @@ class File(models.Model):
     )
     def __str__(self):
         return str(self.name)
+
+class Notes(models.Model):
+    title= models.CharField(max_length=100)
+    text_area=models.TextField()
+    date_created=models.DateTimeField(auto_now_add=True)
+    author=models.ForeignKey(
+        User,
+        related_name="notes",
+        on_delete=models.CASCADE,
+        null=True
+    )
+    def __str__(self):
+        return str(self.title)

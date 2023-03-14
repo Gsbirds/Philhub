@@ -1,0 +1,36 @@
+
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+
+<main>
+    <div>
+        <h1>Create a note</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button>Create</button>
+        </form>
+    </div>
+<!--         
+    <button type="button">
+        <a href="{% url 'make_notes' %}">Make a Note</a>
+    </button> -->
+    <div class="notes">
+        <h1 id="Note">Notes</h1>
+        {% for note in notes %}
+        <h3><a href="{% url 'edit_notes' note.id%}">{{note.title}}</a></h3>
+        <p>{{note.text_area}}</p>
+        {% endfor %}
+        </div>
+        
+</main>
+
+{% endblock content %}
