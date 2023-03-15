@@ -10,7 +10,7 @@ Home
 
 {% block content %}
 <main>
- 
+ <h1>Your Favorites</h1>
 {% for fav in favorites %}
 
 <p><a href="{{ MEDIA_URL }}{{ fav.filepath }}">{{ fav.name }}</a></p>
@@ -18,21 +18,7 @@ Home
 {% endfor %}
 
     
-<div class="container">
-    <h1>Make a Note</h1>
-    <form action="{% url 'make_notes' %}" method="post">
-        {% csrf_token %}
-    <div class="form-group">
-        {{ form.title }}
-    </div>
-    <div class="form-group">
-        {{ form.text_area }}
-    </div>
-    <div class="form-group">
-        <input class="btn" type="submit" value="Submit">
-    </div>
-    </form>
-</div>
+
 </main>
 
 {% endblock content %}

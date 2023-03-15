@@ -12,6 +12,9 @@ Home
     
 
 <body>
+
+    <div class="grid5">
+    <div class="files">
     <h1>Upload a document</h1>
     <form enctype="multipart/form-data" method="POST" action="">
     {% csrf_token %}
@@ -19,6 +22,9 @@ Home
     <input type="submit" value="Upload"/>
     </form>
 <h2><a href= {% url 'your_uploads'%}> See your Works</a></h2>
+</div>
+</div>
+
     </body>
 
 </main>

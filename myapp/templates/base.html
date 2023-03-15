@@ -23,19 +23,24 @@
                     <a href={% url 'show_page' %}>Home</a>
                 </li>
                 <li>
-                    <a href={% url 'search' %}>Published Works</a>
+                    <a href={% url 'search' %}>Published Papers</a>
                 </li>
                 <li>
                     <a href={% url 'contact' %}>Contact Us</a>
                 </li>
-                <li class="pink">
-                {% if user.is_authenticated %}
-                Hello, {{user.username}}
-                <a href={% url 'user_logout' %}>Logout</a>
-                <a href={% url 'show_works_form' %}>Upload</a>
-                <a href={% url 'your_uploads' %}>Your Works</a>
-                <a href={% url 'make_notes' %}>Your Notes</a>
-                <a href={% url 'favorites_list' user.id %}>Your Favorites</a>
+                <li class="pink">{% if user.is_authenticated %}
+                Hello, {{user.username}}</li>
+            </ul>
+ 
+                <ul class = "nav2">
+
+              
+               <li> <a href={% url 'user_logout' %}>Logout</a> </li>
+              <li> <a href={% url 'show_works_form' %}>Upload</a> </li> 
+               <li><a href={% url 'your_uploads' %}>Your Papers</a> </li> 
+               <li> <a href={% url 'make_notes' %}>Your Notes</a> </li> 
+               <li><a href={% url 'favorites_list' user.id%}>Your Favorites</a></li> 
+              
                 </li>
                 {% else %}
                 <li>
@@ -45,7 +50,7 @@
                 <li><a href={% url 'user_login' %}>Sign in</a></li>
             
                 {% endif %}
-            </ul>
+                </ul>
         </nav>
     </header>
 {% block content %}

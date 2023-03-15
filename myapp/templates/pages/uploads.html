@@ -10,16 +10,17 @@ Home
 
 {% block content %}
 <main>
-
-<div class="news">
-<h2 id="New">Your Works</h2>
+    <div class="grid3">
+<div class="uploads">
+<h2 id="New">Your Papers</h2>
 {% for upload in uploads %}
 <div>
 <a href="{{ MEDIA_URL }}{{ upload.filepath }}">{{ upload.name }}</a>
 </div>
 {% endfor %}
 </div>
-<div class="container">
+
+<div class="notes">
     <h1>Make a Note</h1>
     <form action="{% url 'make_notes' %}" method="post">
         {% csrf_token %}
@@ -33,6 +34,7 @@ Home
         <input class="btn" type="submit" value="Submit">
     </div>
     </form>
+</div>
 </div>
 </main>
 

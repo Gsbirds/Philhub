@@ -11,8 +11,8 @@ Home
 {% block content %}
 
 <main>
-    
-<div class="container">
+    <div class="grid4">
+<div class="notes1">
     <h1>Make a Note</h1>
     <form action="{% url 'make_notes' %}" method="post">
         {% csrf_token %}
@@ -27,14 +27,17 @@ Home
     </div>
     </form>
 </div>
-    <div class="notes">
+
+<div class= grid6>
+    <div class="noteslist">
         <h1 id="Note">Notes</h1>
         {% for note in notes %}
         <h3><a href="{% url 'edit_notes' note.id%}">{{note.title}}</a></h3>
         <p>{{note.text_area}}</p>
         {% endfor %}
         </div>
-        
+    </div>
+    </div>
 </main>
 
 {% endblock content %}

@@ -95,7 +95,6 @@ def make_notes(request):
             note=form.save(False)
             note.author=request.user
             note.save()
-            return redirect("make_notes")
     else:
         form = textForm()
         
