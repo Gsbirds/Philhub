@@ -9,8 +9,14 @@ Home
 {% endblock title %}
 
 {% block content %}
-
 <main>
+ 
+{% for fav in favorites %}
+
+<p><a href="{{ MEDIA_URL }}{{ fav.filepath }}">{{ fav.name }}</a></p>
+
+{% endfor %}
+
     
 <div class="container">
     <h1>Make a Note</h1>
@@ -27,14 +33,7 @@ Home
     </div>
     </form>
 </div>
-    <div class="notes">
-        <h1 id="Note">Notes</h1>
-        {% for note in notes %}
-        <h3><a href="{% url 'edit_notes' note.id%}">{{note.title}}</a></h3>
-        <p>{{note.text_area}}</p>
-        {% endfor %}
-        </div>
-        
 </main>
 
 {% endblock content %}
+

@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
     <header>
         <nav>
             <ul>
@@ -34,6 +35,7 @@
                 <a href={% url 'show_works_form' %}>Upload</a>
                 <a href={% url 'your_uploads' %}>Your Works</a>
                 <a href={% url 'make_notes' %}>Your Notes</a>
+                <a href={% url 'favorites_list' user.id %}>Your Favorites</a>
                 </li>
                 {% else %}
                 <li>
@@ -45,7 +47,6 @@
                 {% endif %}
             </ul>
         </nav>
-        <h1 id="header_h1">Welcome Philosophers!</h1>
     </header>
 {% block content %}
 

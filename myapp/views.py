@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .functions import handle_uploaded_file 
 from .forms import FileForm, ContactForm
 from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import textForm
 # Create your views here.
 def show_page(request):
@@ -38,9 +38,18 @@ def showfile(request):
 @login_required
 def showuploads(request):
     uploads= File.objects.filter(author=request.user)
-    
+    if request.method=="POST":
+        form= textForm(request.POST)
+        if form.is_valid():
+            note=form.save(False)
+            note.author=request.user
+            note.save()
+            return redirect("make_notes")
+    else:
+        form = textForm()
     context = {
         "uploads":uploads,
+        "form":form,
     }
     return render(request,"pages/uploads.html",context )
 
@@ -49,13 +58,28 @@ def redirect_to_page(request):
 
 def search_results(request):
     posts= File.objects.all()
+    notes=Notes.objects.all()
+    if request.method=="POST":
+        form= textForm(request.POST)
+        if form.is_valid():
+            note=form.save(False)
+            note.author=request.user
+            note.save()
+            return redirect("make_notes")
+    else:
+        form = textForm()
     search_post = request.GET.get('search')
     if search_post:
         posts = File.objects.filter (name__icontains=search_post)
         print(posts)
     else:
         posts = File.objects.all()
-    return render(request, "pages/Published_works.html", {"posts":posts})   
+    context={
+         "posts":posts,
+         "notes":notes,
+         "form":form,
+    }
+    return render(request, "pages/Published_works.html", context)   
 
 # def see_notes(request):
 #     notes= Notes.objects.all()
@@ -97,6 +121,23 @@ def edit_post(request, id):
     }
     return render(request, "pages/edit.html",context)
 
+@login_required
+def favorites_add(request, id):
+    file=get_object_or_404(File,id=id)
+    if file.favorites.filter(id=request.user.id).exists():
+        file.favorites.remove(request.user)
+    else:
+         file.favorites.add(request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+@login_required
+def favorites_list(request, id):
+    favorites= File.objects.filter(favorites=request.user)
+    context = {
+        "favorites": favorites
+    }
+    return render(request,"pages/toread.html",context )
+
 def contact(request):
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
@@ -118,3 +159,4 @@ def contact(request):
       
 	form = ContactForm()
 	return render(request, "pages/contact.html", {'form':form})
+

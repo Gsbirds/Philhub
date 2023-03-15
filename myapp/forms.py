@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from .models import File, Notes
+from django.forms import TextInput
 
 class FileForm(forms.ModelForm):
     class Meta:
@@ -26,5 +27,16 @@ class textForm(ModelForm):
         fields=[
             "title",
             "text_area",
-            "author",
         ]       
+        widgets = {
+            'title': TextInput(attrs={
+                'class': "form-control1",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Title'
+                }),
+            'text_area': TextInput(attrs={
+                'class': "form-control", 
+                'style': 'max-width: 300px;',
+                'placeholder': ''
+                })
+        }
