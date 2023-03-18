@@ -81,12 +81,6 @@ def search_results(request):
     }
     return render(request, "pages/Published_works.html", context)   
 
-# def see_notes(request):
-#     notes= Notes.objects.all()
-#     context = {
-#         "notes": notes
-#     }
-#     return render(request,"pages/notes.html",context )
 def make_notes(request):
     notes= Notes.objects.all()
     if request.method=="POST":
@@ -123,39 +117,37 @@ def edit_post(request, id):
 @login_required
 def favorites_add(request, id):
     file=get_object_or_404(File,id=id)
-    if file.favorites.filter(id=request.user.id).exists():
-        file.favorites.remove(request.user)
-    else:
-         file.favorites.add(request.user)
+    # if file.favorites.filter(id=request.user.id).exists():
+    #     file.favorites.remove(request.user)
+    # else:
+    file.favorites.add(request.user)
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 @login_required
 def favorites_list(request, id):
+    notes=Notes.objects.all()
     favorites= File.objects.filter(favorites=request.user)
     context = {
-        "favorites": favorites
+        "favorites": favorites,
+        "notes": notes
     }
     return render(request,"pages/toread.html",context )
 
 def contact(request):
-	if request.method == 'POST':
-		form = ContactForm(request.POST)
-		if form.is_valid():
-			subject = "Website Inquiry" 
-			body = {
-			'first_name': form.cleaned_data['first_name'], 
-			'last_name': form.cleaned_data['last_name'], 
-			'email': form.cleaned_data['email_address'], 
-			'message':form.cleaned_data['message'], 
-			}
-			message = "\n".join(body.values())
+    if request.method == "GET":
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            first= form.cleaned_data["first_name"]
+            from_email = form.cleaned_data["email_address"]
+            message = form.cleaned_data['message']
+            try:
+                send_mail(first, message, from_email, ["gabbyburgard@the-gabby.com"])
+            except BadHeaderError:
+                return HttpResponse("Invalid header found.")
+            return redirect("show_page")
+    return render(request, "pages/contact.html", {"form": form})
 
-			try:
-				send_mail(subject, message, 'gabbyburgard@yahoo.com', ['gabbyburgard@yahoo.com']) 
-			except BadHeaderError:
-				return HttpResponse('Invalid header found.')
-			return redirect ("show_page")
-      
-	form = ContactForm()
-	return render(request, "pages/contact.html", {'form':form})
+
 

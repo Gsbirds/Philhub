@@ -145,6 +145,13 @@ nav ul{
   grid-row: 1/2;
   padding:1rem;
 }
+
+.sbtn{
+  margin:1rem;
+}
+
+
+
 .results{
   grid-column:2/2;
   grid-row: 1/2;
@@ -200,4 +207,9 @@ nav ul{
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
+}
+
+ .heart{
+  width:20px;
+  height:18px;
 }

@@ -1,6 +1,6 @@
 
 {% extends 'base.html' %}
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,18 +33,22 @@
     <form action="{% url 'search' %}">   
      <input type="search"  
       placeholder="Search" aria-label="Search" name="search">    
-      <button type="submit">Search</button>
+      <button class= "sbtn"type="submit">Search</button>
     </form>
 </div>
 
     <div class="results">
+        <div class="grid8"></div>
     {% for post in posts %}
     <div>
-    <a href="{{ MEDIA_URL }}{{ post.filepath }}">{{ post.name }}</a>
-   <p></p>
-      <a href="{% url 'favorites_add' post.id%}"> <img src= "./heart.png"</a>
-  </div>
+    <a href="{% url 'favorites_add' post.id%}"> <img class= "heart" src= "{% static "css/heart.png" %}" </a>
+  
+    <a class ="post_link" href="{{ MEDIA_URL }}{{ post.filepath }}">{{ post.name }}</a>
+</div>
+
+    
     {% endfor %}
+</div>
     </div>
 
 </div>
