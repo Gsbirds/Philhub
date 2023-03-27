@@ -1,9 +1,10 @@
 from django.urls import path
 from myapp.views import show_page
-from myapp.views import showuploads, showfile, search_results, contact, make_notes, edit_post, favorites_add, favorites_list
+from myapp.views import showuploads, showfile, search_results, contact, make_notes, edit_post, favorites_add, favorites_list, show_page_details
 
 urlpatterns = [
     path("",show_page, name="show_page"),
+    path("" "<int:id>/",show_page_details, name="show_page_details"),
     path("upload/", showfile, name="show_works_form" ),
     path("yourworks/", showuploads, name="your_uploads"),
     path("searchworks/", search_results, name="search"),

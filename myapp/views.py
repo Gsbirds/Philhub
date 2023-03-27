@@ -2,22 +2,56 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import News
 from .models import Work, File, Notes
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 from .functions import handle_uploaded_file 
 from .forms import FileForm, ContactForm
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import textForm
-# Create your views here.
-def show_page(request):
-    #get all recipes from recipes table
-    news = News.objects.all()
-    works= Work.objects.all()
-    context = {
-        "news": news,
-        "works":works,
-    }
-    return render(request,"pages/Philhub_index.html",context )
+from django.http import JsonResponse
+import json
+from .encoder import Show_pageListEncoder, Show_pageDetailsDetailEncoder
 
+@require_http_methods(["GET", "POST"])
+def show_page(request):
+    if request.method=="GET":
+        news = News.objects.all()
+
+        return JsonResponse(
+            {"news": news},
+            encoder=Show_pageListEncoder,
+            )
+    else:
+        content = json.loads(request.body)
+
+        news = News.objects.create(**content)
+        return JsonResponse(
+            news,
+            encoder=Show_pageListEncoder,
+            safe=False,
+        )
+    
+@require_http_methods(["GET", "DELETE", "PUT"])
+def show_page_details(request, id):
+    if request.method == "GET":
+        news = News.objects.get(id=id)
+        return JsonResponse(
+            news, encoder=Show_pageDetailsDetailEncoder, safe=False
+        )
+    elif request.method == "DELETE":
+        count, _ = News.objects.filter(id=id).delete()
+        return JsonResponse({"deleted": count > 0})
+    else:
+        content = json.loads(request.body)
+        News.objects.filter(id=id).update(**content)
+        news = News.objects.get(id=id)
+        
+        return JsonResponse(
+            news,
+            encoder=Show_pageDetailsDetailEncoder,
+            safe=False,
+        )
+ 
 def redirect_to_page(request):
     return redirect("show_page")
 
