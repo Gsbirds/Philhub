@@ -10,7 +10,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .forms import textForm
 from django.http import JsonResponse
 import json
-from .encoder import Show_pageListEncoder, Show_pageDetailsDetailEncoder
+from .encoder import Show_pageListEncoder, Show_pageDetailsDetailEncoder, WorksListEncoder, Show_WorksDetailEncoder
 
 @require_http_methods(["GET", "POST"])
 def show_page(request):
@@ -55,6 +55,81 @@ def show_page_details(request, id):
 def redirect_to_page(request):
     return redirect("show_page")
 
+@require_http_methods(["GET", "POST"])
+def api_list_works(request):
+    if request.method == "GET":
+        posts = File.objects.all()
+        ret = []
+        for n in range(len(posts)):
+            ret.append({
+                "filepath":posts[n].filepath.__str__(),
+                "user":posts[n].author.__str__(),
+                "name":posts[n].name
+            })
+
+        return JsonResponse(
+            ret,
+            encoder=WorksListEncoder,
+            safe=False
+        )
+    else:
+        content = json.loads(request.body)
+        posts = File.objects.create(**content)
+        return JsonResponse(
+            posts,
+            encoder=WorksListEncoder,
+            safe=False,
+        )
+
+@require_http_methods(["GET", "PUT", "DELETE"])
+def api_show_works(request, id):
+    if request.method == "GET":
+        posts = File.objects.get(id=id)
+        return JsonResponse(
+            {"filepath":posts.filepath.__str__(),
+                "user":posts.author.__str__(),
+                "name":posts.name}, encoder=Show_pageDetailsDetailEncoder, safe=False
+        )
+    elif request.method == "DELETE":
+        count, _ = File.objects.filter(id=id).delete()
+        return JsonResponse({"deleted": count > 0})
+    else:
+        content = json.loads(request.body)
+        File.objects.filter(id=id).update(**content)
+        posts = File.objects.get(id=id)
+        
+        return JsonResponse(
+            posts,
+            encoder=Show_WorksDetailEncoder,
+            safe=False,
+        )
+# def search_results(request):
+#     posts= File.objects.all()
+
+#     notes=Notes.objects.all()
+#     if request.method=="POST":
+#         form= textForm(request.POST)
+#         if form.is_valid():
+#             note=form.save(False)
+#             note.author=request.user
+#             note.save()
+#             return redirect("make_notes")
+#     else:
+#         form = textForm()
+#     search_post = request.GET.get('search')
+#     if search_post:
+#         posts = File.objects.filter (name__icontains=search_post)
+#         print(posts)
+#     else:
+#         posts = File.objects.all()
+#     context={
+#          "posts":posts,
+#          "notes":notes,
+#          "form":form,
+#     }
+#     return render(request, "pages/Published_works.html", context)   
+
+
 @login_required
 def showfile(request):
     form= FileForm(request.POST or None, request.FILES or None)
@@ -89,31 +164,6 @@ def showuploads(request):
 
 def redirect_to_page(request):
     return redirect("show_page")
-
-def search_results(request):
-    posts= File.objects.all()
-    notes=Notes.objects.all()
-    if request.method=="POST":
-        form= textForm(request.POST)
-        if form.is_valid():
-            note=form.save(False)
-            note.author=request.user
-            note.save()
-            return redirect("make_notes")
-    else:
-        form = textForm()
-    search_post = request.GET.get('search')
-    if search_post:
-        posts = File.objects.filter (name__icontains=search_post)
-        print(posts)
-    else:
-        posts = File.objects.all()
-    context={
-         "posts":posts,
-         "notes":notes,
-         "form":form,
-    }
-    return render(request, "pages/Published_works.html", context)   
 
 def make_notes(request):
     notes= Notes.objects.all()

@@ -43,7 +43,7 @@
     <div>
     <a href="{% url 'favorites_add' post.id%}"> <img class= "heart" src= "{% static "css/heart.png" %}" </a>
   
-    <a class ="post_link" href="{{ MEDIA_URL }}{{ post.filepath }}">{{ post.name }}</a>
+    <a class ="post_link" href="{{ MEDIA_URL }}{{ post.filepath }}">{{post.name}}</a>
 </div>
 
     

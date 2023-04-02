@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block title %}
+<h1>Search Works</h1>
+{% endblock title %}
+
+{% block content %}
+<h1>Profile</h1>
+
+<main>
+        <div class="grid8"></div>
+
+<div>
+    <p>{{ profile.name }}</p>
+    <!-- {% for paper in papers%} -->
+    <a class ="post_link" href="{{ MEDIA_URL }}{{profile.paper}}">papers</a>
+   <!-- {% endfor %} -->
+</div>
+
+<div>
+    {% for f in friends%}
+    <p>{{f.name}}</p>
+    <a class ="post_link" href="{{ MEDIA_URL }}{{f.paper}}">papers</a>
+    {% endfor%}
+</div>
+
+<div>
+{% for collab in collabs %}
+<p>{{collab.title}}</p>
+<p>{{collab.author}}</p>
+<a class ="post_link" href="{{ MEDIA_URL }}{{collab.paper}}">papers</a>
+{% endfor %}
+</div>
+
+</main>
+
+{% endblock content %}
