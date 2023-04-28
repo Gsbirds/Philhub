@@ -18,9 +18,6 @@ function Nav() {
       <NavLink className="nav-link" aria-current="page" to="/searchworks/new">Upload</NavLink>
       </li>
       <li>
-      <NavLink className="nav-link" aria-current="page" to="/notes">Make Notes</NavLink>
-      </li>
-      <li>
       <NavLink className="nav-link" aria-current="page" to="/noteslist">Notes</NavLink>
       </li>
       <li className="nav-item">

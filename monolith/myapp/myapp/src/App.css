@@ -47,7 +47,6 @@ h1{
   background-color:#cad6ec;
   border-radius: 10px;
   box-shadow: 2px 2px 2px 2px grey;
-
 }
 
 nav{
@@ -70,9 +69,52 @@ a:hover{
 
  li{
   list-style-type: none;
+  color: #183078;
  }
 
  button{
   margin:5px;
 
+ }
+
+ .note{
+  padding:3rem;
+  border-style: solid;
+  border-color: #183078;
+  width:500px;
+  margin:3rem;
+  border-radius: 10px;
+ }
+
+ .delete{
+  border-radius: 5px;
+  border-color: #183078;
+  color:#183078;
+ }
+
+ .create{
+  border-radius: 5px;
+  border-color:#183078;
+  color:#183078;
+ }
+ .upload{
+  border-radius: 5px;
+  border-color: black;
+  color: black;
+ }
+ .delete:hover{
+  color:red;
+ }
+
+ .create:hover{
+  color:gray;
+ }
+
+ .upload:hover{
+  color:gray;
+ }
+
+ .makeNote{
+  color:#183078;
+  /* margin-left: -35px; */
  }

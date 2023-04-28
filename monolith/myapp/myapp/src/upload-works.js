@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 function Upload(){
     const [name, setName] = useState("");
     const [file, setFile] = useState("");
@@ -41,10 +42,9 @@ function Upload(){
     };
 
 return(
-
+<>
     <div className="row">
     <div className="offset-3 col-6">
-      <div className="container">
         <h1>Upload a Paper</h1>
         <form onSubmit={handleSubmit} id="create-presentation-form">
           <div className="form-floating mb-3">
@@ -57,12 +57,11 @@ return(
             <input onChange={handleFileChange} value={file} className="form-control" type="file" id="formFile"/>
             </div>
 
-          <button className="btn btn-primary">Upload</button>
+          <button className="upload">Upload</button>
         </form>
       </div>
     </div>
-  </div>
-
+</>
 )
 }
 

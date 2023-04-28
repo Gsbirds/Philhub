@@ -58,8 +58,8 @@ function Notes(){
 return(
 
     <div className="row">
-    <div className="offset-3 col-6">
-      <div className="container">
+    <div className="offset-1 col-6">
+      <div className="makeNote">
         <h1>Make a note</h1>
         <form onSubmit={handleSubmit} id="create-presentation-form">
           <div className="form-floating mb-3">
@@ -71,11 +71,11 @@ return(
             <textarea onChange={handleNoteChange} id="synopsis" className="form-control" rows="3" ></textarea>
           </div>
 
-          <button className="btn btn-primary">Create</button>
+          <button className="create">Create</button>
         </form>
       </div>
     </div>
-  </div>
+    </div>
 
 )
 }
