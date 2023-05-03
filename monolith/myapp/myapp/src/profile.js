@@ -43,7 +43,7 @@ function Profile() {
       <div>
         <ul>
           <li>
-            <img src={picture} alt="profile picture" />
+            <img src={picture} className="profilePic" alt="profile picture" />
           </li>
           <li><h4>{name.name}</h4></li>
           <li>{files}</li>

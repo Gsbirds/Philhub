@@ -11,7 +11,7 @@ import Upload from "./upload-works";
 import Contact from "./contact";
 import Profile from "./profile";
 import { Login } from "./login";
-
+import Footer from "./footer";
 
 function App(props) {
 
@@ -43,6 +43,7 @@ function App(props) {
       <Route path="/login" element={<Login/>}/>
       </Route>
       </Routes>
+      <Footer/>
       </BrowserRouter>
     </>
   );

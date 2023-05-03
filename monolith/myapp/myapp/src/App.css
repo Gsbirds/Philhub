@@ -149,3 +149,14 @@ a:hover{
 h4{
   margin:5px;
 }
+
+.profilePic{
+  border-radius: 10px;
+  width:200px;
+  border-style:solid;
+}
+
+.footer{
+  padding-top:100px;
+  padding-left:30px;
+}

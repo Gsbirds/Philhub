@@ -6,14 +6,15 @@ import json
 from .encoder import Show_profileEncoder
 from django.views.decorators.http import require_http_methods
 # Create your views here.
-@login_required
+# @login_required
 @require_http_methods(["GET", "DELETE", "PUT"])
 def show_profile(request):
     if request.method == "GET":
-        profile = Profile.objects.get(name=request.user)
+        profile = Profile.objects.get(name="gabby")
         return JsonResponse(
             {"profile":profile,
-             "filepath":profile.paper.filepath.__str__(),
+             "paper":profile.paper.filepath.__str__(),
+             "picture":profile.picture
                 }, encoder=Show_profileEncoder, safe=False
         )
     elif request.method == "DELETE":

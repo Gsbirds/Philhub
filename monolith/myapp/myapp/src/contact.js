@@ -47,7 +47,6 @@ function Contact() {
   return (
     <div className="row">
       <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
           <h1>Send a Message</h1>
           <form onSubmit={handleSubmit} id="create-presentation-form">
             <div className="form-floating mb-3">
@@ -85,11 +84,10 @@ function Contact() {
               <label htmlFor="presenter_name">Message</label>
             </div>
 
-            <button className="btn btn-primary">Send</button>
+            <button className="upload">Send</button>
           </form>
         </div>
       </div>
-    </div>
   );
 }
 

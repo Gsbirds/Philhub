@@ -25,12 +25,13 @@ SECRET_KEY = 'django-insecure-9a+_j+mj(l0@p%7@+#-e9d&2l6p_rcp&^r9iux_q#z!9lrn&z-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "monolith", "0.0.0.0"]
+ALLOWED_HOSTS = ["localhost", "mono2", "0.0.0.0", "monolith"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+     "corsheaders",
     'accounts.apps.AccountsConfig',
     'myapp.apps.MyappConfig',
     'django.contrib.admin',
@@ -39,9 +40,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework', # new
+'rest_framework.authtoken', # new
+'rest_auth', # new
+'django.contrib.sites', # new
+'allauth', # new
+'allauth.account', # new
+'allauth.socialaccount', # new
+'rest_auth.registration', # new
+'users', 
 ]
 
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://localhost:3001"]
+
+CORS_ALLOW_CREDENTIALS = True
+
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,6 +66,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000", "http://localhost:3001"
+]
 ROOT_URLCONF = 'Philhub.urls'
 
 TEMPLATES = [
@@ -133,4 +151,11 @@ EMAIL_HOST = 'smtp.ionos.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'gabbyburgard@the-gabby.com'
-EMAIL_HOST_PASSWORD ="***********"
+EMAIL_HOST_PASSWORD = 'Frankleeabufish729699'
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
+REST_FRAMEWORK = {    
+'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",    'DEFAULT_AUTHENTICATION_CLASSES': [        'rest_framework.authentication.TokenAuthentication',    
+],
+}

@@ -32,6 +32,7 @@ class Friend(models.Model):
         return str(self.name)
     
 class Profile(models.Model):
+    picture=models.URLField(max_length=500, null=True)
     name=models.CharField(max_length=200)
     paper= models.ForeignKey(
         FileVO,

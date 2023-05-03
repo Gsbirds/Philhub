@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     "django_crontab",
     'connect.apps.ConnectConfig',
     'django.contrib.admin',
@@ -40,11 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://localhost:3001"]
+
+CORS_ALLOW_CREDENTIALS = True
+
 CRONJOBS = [
     ("* * * * *", "connect.poll.get_conferences"),
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,6 +58,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000", "http://localhost:3001"
 ]
 
 ROOT_URLCONF = 'connect_bc.urls'

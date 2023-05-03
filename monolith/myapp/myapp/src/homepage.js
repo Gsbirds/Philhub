@@ -32,6 +32,9 @@ function HomePage() {
           <li key={item.href}>
             <a href={item.href}> {item.title}</a>
           </li>
+          <li>
+          <p>{item.description}</p>
+          </li>
           </div>
         ))}
       </ul>

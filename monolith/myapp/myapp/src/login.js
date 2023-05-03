@@ -30,7 +30,6 @@ export const Login = () => {
       <>
 <div className="row">
 <div className="offset-3 col-6">
-  <div className="shadow p-4 mt-4">
     <h1>Log In</h1>
     <form onSubmit={submit} id="create-presentation-form">
       <div className="form-floating mb-3">
@@ -57,10 +56,9 @@ export const Login = () => {
         <label htmlFor="presenter_name">Password</label>
       </div>
 
-      <button className="btn btn-primary">Submit</button>
+      <button className="upload">Submit</button>
     </form>
   </div>
-</div>
 </div>
 </>
      )

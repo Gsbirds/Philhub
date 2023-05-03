@@ -3,6 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from accounts.forms import SignUpForm
 from accounts.forms import LogInForm
+from .encoders import LogInEncoder
+import json
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
 # Create your views here.
 def signup(request):
     if request.method=="POST":
@@ -32,6 +36,7 @@ def signup(request):
     }
     return render(request, "accounts/signup.html", context)
 
+@require_http_methods(["POST"])
 def user_login(request):
     if request.method== "POST":
         form= LogInForm(request.POST)
@@ -44,17 +49,25 @@ def user_login(request):
                 username=username,
                 password=password,
             )
-            if user is not None:
-                login(request, user)
-                return redirect("show_page")
-    else:
-        form= LogInForm()
-    context = {
-        "form":form,
-    }
+            # if user is not None:
+            #     login(request, user)
+            #     return redirect("show_page")
+            
+            content = json.loads(request.body)
+            user = LogInForm.objects.create(**content)
+            return JsonResponse(
+            user,
+            encoder=LogInEncoder,
+            safe=False,
+            )
+        
+#         form= LogInForm()
+#     context = {
+#         "form":form,
+#     }
 
-    return render(request, "accounts/login.html", context)
+#     return render(request, "accounts/login.html", context)
 
-def user_logout(request):
-    logout(request)
-    return redirect("show_page")
+# def user_logout(request):
+#     logout(request)
+#     return redirect("show_page")
