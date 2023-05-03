@@ -8,6 +8,9 @@ import NotesList from "./notesList";
 import File from "./show-file";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Upload from "./upload-works";
+import Contact from "./contact";
+import Profile from "./profile";
+import { Login } from "./login";
 
 
 function App(props) {
@@ -20,6 +23,12 @@ function App(props) {
       <Route path="/">
     <Route index element={< HomePage/>} />
     </Route>
+    <Route>
+    <Route path="/contact" element={<Contact />}></Route>
+    </Route>
+    <Route>
+    <Route path="/profile" element={<Profile />}></Route>
+    </Route>
       <Route path="/searchworks">
       <Route index element={<SearchBar />} />
       <Route path="new" element={<Upload />}></Route>
@@ -29,6 +38,9 @@ function App(props) {
       </Route>
       <Route path="/noteslist">
       <Route index element={<NotesList />} />
+      </Route>
+      <Route>
+      <Route path="/login" element={<Login/>}/>
       </Route>
       </Routes>
       </BrowserRouter>

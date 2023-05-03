@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import "./App.css";
 import Notes from "./notes";
 
@@ -18,7 +17,7 @@ function SearchBar() {
 
     if (response.ok) {
       const data = await response.json();
-      setFiles(data);
+      setFiles(data.posts);
       console.log(files);
     }
   };
@@ -28,9 +27,23 @@ function SearchBar() {
 
   const filteredData = files.filter((el) => {
     if (inputText === "") {
-      return el;
+      return "";
     } else {
       return el.name.toLowerCase().includes(inputText);
+    }
+  });
+  const filteredAuthor = files.filter((el) => {
+    if (inputText === "") {
+      return "";
+    } else {
+      return el.author.toLowerCase().includes(inputText);
+    }
+  });
+  const filteredTopic = files.filter((el) => {
+    if (inputText === "") {
+      return "";
+    } else {
+      return el.topic.toLowerCase().includes(inputText);
     }
   });
 
@@ -54,7 +67,36 @@ function SearchBar() {
               aria-label="search"
               aria-describedby="basic-addon1"
             />
+             <div className="input-group-prepend">
+              <button className="btn btn-outline-secondary" type="button">
+                Search Author
+              </button>
+            </div>
+            <input
+              id="outlined-basic"
+              onChange={inputHandler}
+              type="text"
+              className="form-control"
+              placeholder=""
+              aria-label="search"
+              aria-describedby="basic-addon1"
+            />
+                 <div className="input-group-prepend">
+              <button className="btn btn-outline-secondary" type="button">
+                Search Topic
+              </button>
+            </div>
+            <input
+              id="outlined-basic"
+              onChange={inputHandler}
+              type="text"
+              className="form-control"
+              placeholder=""
+              aria-label="search"
+              aria-describedby="basic-addon1"
+            />
           </div>
+          
         </div>
 
         <ul className="list">
@@ -68,9 +110,39 @@ function SearchBar() {
               </a>
             </li>
           ))}
+                    {filteredAuthor.map((item) => (
+            <li key={item.href}>
+              <a
+                className="headerProfile-menu-list"
+                onClick={() => window.open(item.filepath)}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))}
+                    {filteredTopic.map((item) => (
+            <li key={item.href}>
+              <a
+                className="headerProfile-menu-list"
+                onClick={() => window.open(item.filepath)}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
+      <div className="grid">
       <Notes />
+      <ul className="topics">
+        <h1>Topics</h1>
+        {files.map((item) => (
+            <li key={item.href}>
+                {item.topic}
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }

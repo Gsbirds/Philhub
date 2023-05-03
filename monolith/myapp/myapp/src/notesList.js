@@ -4,6 +4,7 @@ import Notes from "./notes";
 
 function NotesList() {
   const [files, setFiles] = useState([]);
+  const [input, setInput]= useState("")
 
   const fetchData = async () => {
     const url = "http://localhost:8000/philhub/noteslist";
@@ -19,6 +20,12 @@ function NotesList() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  let inputHandler = (e) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase();
+    setInput(lowerCase);
+  };
 
   const handleDeleteButton = async (e) => {
     const { id } = e.target;
@@ -37,15 +44,36 @@ function NotesList() {
       setFiles(files.filter((item) => item.id !== parseInt(id)));
     }
   };
+  const filteredData = files.filter((el) => {
+    if (input === "") {
+      return el;
+    } else {
+      return el.title.toLowerCase().includes(input);
+    }
+  });
 
   return (
     <>
-      <div>
-        <Notes />
-      </div>
-
+          <div className="container">
+      <div className="input-group mb-3">
+      <div className="input-group-prepend">
+             <label className="label">Search Notes</label>
+            </div>
+            <input
+              id="outlined-basic"
+              onChange={inputHandler}
+              type="text"
+              className="form-control"
+              placeholder=""
+              aria-label="search"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+          </div>
+        <div className="grid">
+      <div classname="grid-item-2">
       <ul className="list">
-        {files.map((item) => (
+        {filteredData.map((item) => (
           // <div className="container">
           <div className= "note">
             <li key={item.id}>
@@ -65,6 +93,11 @@ function NotesList() {
            </div>
         ))}
       </ul>
+      </div>
+      <div classname="grid-item-1">
+        <Notes />
+      </div>
+      </div>
     </>
   );
 }

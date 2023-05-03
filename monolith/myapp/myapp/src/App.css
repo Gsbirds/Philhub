@@ -118,3 +118,34 @@ a:hover{
   color:#183078;
   /* margin-left: -35px; */
  }
+
+ .label{
+  margin:3px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: 700px 700px 700px;
+  grid-template-rows: 1fr;
+}
+
+.label{
+  margin-left:10px;
+  margin-right:10px;
+}
+
+.topics{
+  margin-top: 2rem;
+}
+
+.profile{
+  margin:3rem;
+  background-color:#cad6ec;
+  padding: 2rem;
+  border-radius: 10px;
+  border-style: solid;
+}
+
+h4{
+  margin:5px;
+}

@@ -20,8 +20,14 @@ function Nav() {
       <li>
       <NavLink className="nav-link" aria-current="page" to="/noteslist">Notes</NavLink>
       </li>
+      <li>
+      <NavLink className="nav-link" aria-current="page" to="/profile">Profile</NavLink>
+      </li>
+      <li>
+      <NavLink className="nav-link" aria-current="page" to="/contact">Contact</NavLink>
+      </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Login</a>
+      <NavLink className="nav-link" aria-current="page" to="/login">Login</NavLink>
       </li>
 
     </ul>
