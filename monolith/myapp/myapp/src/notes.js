@@ -21,7 +21,7 @@ function Notes(){
       data.text_area = note;
       console.log(data);
   
-      const locationUrl = "http://localhost:8000/philhub/noteslist";
+      const locationUrl = "http://localhost:8000/philhub/api/notes/";
       const fetchConfig = {  
         method: "post",
         body: JSON.stringify(data),
@@ -38,7 +38,7 @@ function Notes(){
       }
     };
     const fetchData = async () => {
-      const url = "http://localhost:8000/philhub/noteslist";
+      const url = "http://localhost:8000/philhub/api/notes/";
   
       const response = await fetch(url);
   
@@ -48,6 +48,7 @@ function Notes(){
         setTitle("");
         setNote("");
       }
+
     };
   
     // useEffect(() => {

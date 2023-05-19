@@ -7,7 +7,7 @@ function NotesList() {
   const [input, setInput]= useState("")
 
   const fetchData = async () => {
-    const url = "http://localhost:8000/philhub/noteslist";
+    const url = "http://localhost:8000/philhub/api/notes";
 
     const response = await fetch(url);
 
@@ -29,7 +29,7 @@ function NotesList() {
 
   const handleDeleteButton = async (e) => {
     const { id } = e.target;
-    const locationUrl = `http://localhost:8000/philhub/note/${id}`;
+    const locationUrl = `http://localhost:8000/philhub/api/notes/${id}`;
     const fetchConfig = {
       method: "delete",
       headers: {
