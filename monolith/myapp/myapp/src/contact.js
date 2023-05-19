@@ -26,7 +26,7 @@ function Contact() {
     data.email_address = email;
     data.message = message;
 
-    const hatsUrl = "http://localhost:8000/philhub/contact/";
+    const hatsUrl = "http://localhost:8000/philhub/api/contact/";
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(data),

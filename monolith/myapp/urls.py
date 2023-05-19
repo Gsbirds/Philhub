@@ -5,15 +5,15 @@ from myapp.views import api_list_notes, api_notes_detail, showuploads, showfile,
 urlpatterns = [
     path("",show_page, name="show_page"),
     path("" "<int:id>/",show_page_details, name="show_page_details"),
-    path("upload/", showfile, name="show_works_form" ),
-    path("yourworks/", showuploads, name="your_uploads"),
-    path("searchworks/", api_list_works, name="list_works"),
-    path("searchworks/<int:id>/", api_show_works, name="show_works"),
-    path("noteslist", api_list_notes, name="list_notes"),
-    path("note/<int:id>/", api_notes_detail, name="show_note"),
+    path("api/upload/", showfile, name="show_works_form" ),
+    path("api/yourworks/", showuploads, name="your_uploads"),
+    path("api/searchworks/", api_list_works, name="list_works"),
+    path("api/searchworks/<int:id>/", api_show_works, name="show_works"),
+    path("api/noteslist", api_list_notes, name="list_notes"),
+    path("api/note/<int:id>/", api_notes_detail, name="show_note"),
 
 
 
-    path("contact/", contact, name="contact" ),
+    path("api/contact/", contact, name="contact" ),
 
 ]
