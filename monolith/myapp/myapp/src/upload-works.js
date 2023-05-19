@@ -34,7 +34,7 @@ function Upload(){
       data.topic=topic;
       console.log(data);
   
-      const locationUrl = "http://localhost:8000/philhub/searchworks/";
+      const locationUrl = "http://localhost:8000/philhub/api/searchworks/";
       const fetchConfig = {
         method: "post",
         body: JSON.stringify(data),

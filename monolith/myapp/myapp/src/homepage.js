@@ -5,7 +5,7 @@ function HomePage() {
   const [files, setFiles]=useState([]);
 
   const fetchData = async () => {
-    const url = "http://localhost:8000/api/philhub/";
+    const url = "http://localhost:8000/philhub/";
 
     const response = await fetch(url);
 

@@ -17,7 +17,7 @@ function SearchBar() {
   };
 
   const fetchData = async () => {
-    const url = "http://localhost:8000/philhub/searchworks";
+    const url = "http://localhost:8000/philhub/api/searchworks";
 
     const response = await fetch(url);
 

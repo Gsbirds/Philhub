@@ -21,8 +21,8 @@ function Notes(){
       data.text_area = note;
       console.log(data);
   
-      const locationUrl = "http://localhost:8000/philhub/api/noteslist";
-      const fetchConfig = {
+      const locationUrl = "http://localhost:8000/philhub/noteslist";
+      const fetchConfig = {  
         method: "post",
         body: JSON.stringify(data),
         headers: {
@@ -38,7 +38,7 @@ function Notes(){
       }
     };
     const fetchData = async () => {
-      const url = "http://localhost:8000/philhub/api/noteslist";
+      const url = "http://localhost:8000/philhub/noteslist";
   
       const response = await fetch(url);
   
