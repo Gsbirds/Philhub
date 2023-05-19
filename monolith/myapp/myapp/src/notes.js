@@ -34,8 +34,7 @@ function Notes(){
       if (response.ok) {
         const newLocation = await response.json();
         console.log(newLocation);
-        setTitle("");
-        setNote("");
+    
       }
     };
     const fetchData = async () => {
@@ -46,17 +45,18 @@ function Notes(){
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        
+        setTitle("");
+        setNote("");
       }
     };
   
-    useEffect(() => {
-      fetchData();
-    }, []);
+    // useEffect(() => {
+    //   fetchData();
+    // }, []);
 
 
 return(
-
+<div className="notesey">
     <div className="row">
     <div className="offset-1 col-6">
       <div className="makeNote">
@@ -76,7 +76,7 @@ return(
       </div>
     </div>
     </div>
-
+    </div>
 )
 }
 

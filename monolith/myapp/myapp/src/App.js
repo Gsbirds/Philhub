@@ -8,13 +8,17 @@ import NotesList from "./notesList";
 import File from "./show-file";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Upload from "./upload-works";
+import Profile from "./profile";
+import { Login } from "./login";
+import Footer from "./footer";
 
 
-function App(props) {
+function App() {
 
   return (
     <>
     <BrowserRouter>
+    <div className="content">
       <Nav />
       <Routes>
       <Route path="/">
@@ -30,8 +34,16 @@ function App(props) {
       <Route path="/noteslist">
       <Route index element={<NotesList />} />
       </Route>
+      <Route path="/profile">
+      <Route index element={<Profile />} />
+      </Route>
+      <Route path="/login">
+      <Route index element={<Login />} />
+
+      </Route>
       </Routes>
-      <Footer/>
+      </div>
+      <Footer/>  
       </BrowserRouter>
     </>
   );

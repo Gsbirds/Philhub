@@ -13,7 +13,7 @@ def show_profile(request):
         profile = Profile.objects.get(name="gabby")
         return JsonResponse(
             {"profile":profile,
-             "paper":profile.paper.filepath.__str__(),
+             "paper":profile.paper.import_href.__str__(),
              "picture":profile.picture
                 }, encoder=Show_profileEncoder, safe=False
         )

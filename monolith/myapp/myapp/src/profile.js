@@ -46,7 +46,6 @@ function Profile() {
             <img src={picture} className="profilePic" alt="profile picture" />
           </li>
           <li><h4>{name.name}</h4></li>
-          <li>{files}</li>
         </ul>
       </div>
       <ul>

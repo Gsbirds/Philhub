@@ -42,11 +42,14 @@ h1{
   font-family: 'Poppins', sans-serif;
   padding-top: 10px;
 }
+
 .container{
   font-family: 'Poppins', sans-serif;
   background-color:#cad6ec;
   border-radius: 10px;
   box-shadow: 2px 2px 2px 2px grey;
+  margin:auto;
+  margin-top:30px;
 }
 
 nav{
@@ -60,12 +63,12 @@ a:hover{
   color:#183078;
   font-size: 20px;
  }
-
+/* 
  .list{
   margin:10px;
   padding-bottom: 20px;
   
- }
+ } */
 
  li{
   list-style-type: none;
@@ -124,9 +127,8 @@ a:hover{
 }
 
 .grid{
-  display:grid;
-  grid-template-columns: 700px 700px 700px;
-  grid-template-rows: 1fr;
+  display:grid ;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .label{
@@ -135,9 +137,17 @@ a:hover{
 }
 
 .topics{
-  margin-top: 2rem;
+  margin-top: 8px;;
+  margin-left: 15rem;
 }
 
+.recent{
+  margin-top: 8px;;
+  margin-left: 10px;
+}
+.popular{
+  margin-top: 8px;
+}
 .profile{
   margin:3rem;
   background-color:#cad6ec;
@@ -156,7 +166,126 @@ h4{
   border-style:solid;
 }
 
-.footer{
-  padding-top:100px;
-  padding-left:30px;
+.note1{
+ margin-left: 6rem;
+ margin-top: 3rem;;
+}
+
+.grid2{
+  margin:auto
+}
+
+.list{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr 1fr;
+}
+.note{
+  margin-left: 15rem;
+}
+
+.list :nth-child(even){
+  grid-row:2/2;
+}
+
+.notesitems{
+  margin-left:auto;
+}
+
+.notesey{
+  margin-left: 25rem;
+}
+
+
+@media (max-width: 800px){
+  .list{
+    display:inline;
+      }
+      .note{
+        margin-left:6rem;
+        width:200px;
+      }
+      .row{
+        margin-left: 10px;
+      }
+      .topics{
+        margin-left: 4rem;
+      }
+      .notesey{
+        margin-left: 5px;
+      }
+
+}
+
+@media (max-width: 1400px){
+  .list{
+display:inline;
+  }
+  .note{
+    margin-left:6rem;
+  }
+  .row{
+    margin-left: 10px;
+  }
+  .topics{
+    margin-left: 4rem;
+  }
+  .notesey{
+    margin-left: 5px;
+    margin-top: 40px;
+  }
+  
+}
+
+
+@media (min-width: 2000px){
+  .list{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+    margin-left: 22rem;
+  }
+  .list :nth-child(even){
+    grid-row:2/3;
+  }
+  .row{
+    margin:auto;
+  }
+  .topics{
+    margin-left: 48rem;
+  }
+  .notesey{
+    margin-top: 40px;
+    margin-left: 40rem;
+  }
+
+}
+
+.content{
+  min-height: calc(100vh - 34px);
+}
+.footer {
+  position: relative;
+  margin-left: 1rem;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;;
+  left: 0;
+  bottom: 0;
+  background-color: #cad6ec;
+  padding:10px;
+  padding-left: 10px;
+}
+
+.claim{
+  padding-top: 12rem;
+  padding-bottom: 3rem;
+}
+
+.claimsHead{
+  padding-left:49rem;
+
+}
+
+.container{
+  padding: 2rem;
 }

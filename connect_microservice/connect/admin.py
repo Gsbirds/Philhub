@@ -32,7 +32,6 @@ admin.site.register(Collab, CollabAdmin)
 class FileVOAdmin(admin.ModelAdmin):
     list_display=(
         "name",
-        "filepath",
-        "id",
+        "id"
     )
 admin.site.register(FileVO, FileVOAdmin)

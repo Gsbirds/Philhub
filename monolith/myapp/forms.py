@@ -2,8 +2,8 @@ from django.forms import ModelForm
 from django import forms
 from .models import File, Notes
 from django.forms import Textarea
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm 
-from .models import CustomUser 
+# from django.contrib.auth.forms import UserChangeForm, UserCreationForm 
+# from .models import CustomUser 
 
 class FileForm(forms.ModelForm):
     class Meta:
@@ -43,11 +43,11 @@ class textForm(ModelForm):
         }
 
 
-class CustomUserCreationForm(UserCreationForm):    
-    class Meta:        
-        model = CustomUser        
-        fields = ('email', )  
-class CustomUserChangeForm(UserChangeForm):    
-    class Meta:        
-        model = CustomUser        
-        fields = UserChangeForm.Meta.fields
+# class CustomUserCreationForm(UserCreationForm):    
+#     class Meta:        
+#         model = CustomUser        
+#         fields = ('email', )  
+# class CustomUserChangeForm(UserChangeForm):    
+#     class Meta:        
+#         model = CustomUser        
+#         fields = UserChangeForm.Meta.fields

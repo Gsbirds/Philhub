@@ -64,7 +64,7 @@ class File(models.Model):
         return reverse("show_works", kwargs={"id": self.id})
     
 
-class CustomUser(AbstractUser):
-    # Any extra fields would go here
-    def __str__(self):
-        return self.email
+# class CustomUser(AbstractUser):
+#     # Any extra fields would go here
+#     def __str__(self):
+#         return self.email

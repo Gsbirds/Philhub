@@ -25,14 +25,14 @@ SECRET_KEY = 'django-insecure-5ory4i^nb5*0jh7n7u*svf66b9!w_zb8)n9&4s3%05m=1_7p0b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'mono4', 'monolith']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "corsheaders",
-    "django_crontab",
+    'corsheaders',
+    'django_crontab',
     'connect.apps.ConnectConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://localhost:3001"]
 
 CORS_ALLOW_CREDENTIALS = True
