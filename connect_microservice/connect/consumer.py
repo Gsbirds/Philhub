@@ -9,7 +9,7 @@ def process_message(ch, method, properties, body):
 # Create a main method to run
 def main():
     # Set the hostname that we'll connect to
-    parameters = pika.ConnectionParameters(host='rabbitmq')
+    parameters = pika.ConnectionParameters(host="rabbitmq")
 
     # Create a connection to RabbitMQ
     connection = pika.BlockingConnection(parameters)
@@ -18,29 +18,29 @@ def main():
     channel = connection.channel()
 
     # Create a queue if it does not exist
-    channel.queue_declare(queue='tasks')
+    channel.queue_declare(queue="tasks")
 
     # Configure the consumer to call the process_message function
     # when a message arrives
     channel.basic_consume(
-        queue='tasks',
+        queue="tasks",
         on_message_callback=process_message,
         auto_ack=True,
     )
 
     # Print a status
-    print(' [*] Waiting for messages. To exit press CTRL+C')
+    print(" [*] Waiting for messages. To exit press CTRL+C")
 
     # Tell RabbitMQ that you're ready to receive messages
     channel.start_consuming()
 
 
 # Just extra stuff to do when the script runs
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print('Interrupted')
+        print("Interrupted")
         try:
             sys.exit(0)
         except SystemExit:

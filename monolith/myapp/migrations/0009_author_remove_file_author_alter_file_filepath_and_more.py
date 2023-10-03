@@ -5,32 +5,44 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('myapp', '0008_remove_file_author_file_author'),
+        ("myapp", "0008_remove_file_author_file_author"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Author',
+            name="Author",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=100)),
-                ('last_name', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=100)),
+                ("last_name", models.CharField(max_length=100)),
             ],
         ),
         migrations.RemoveField(
-            model_name='file',
-            name='author',
+            model_name="file",
+            name="author",
         ),
         migrations.AlterField(
-            model_name='file',
-            name='filepath',
-            field=models.FileField(upload_to='media/files/'),
+            model_name="file",
+            name="filepath",
+            field=models.FileField(upload_to="media/files/"),
         ),
         migrations.AddField(
-            model_name='file',
-            name='author',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='file', to='myapp.author'),
+            model_name="file",
+            name="author",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="file",
+                to="myapp.author",
+            ),
         ),
     ]

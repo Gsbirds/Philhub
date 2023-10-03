@@ -5,19 +5,23 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('myapp', '0006_toread'),
+        ("myapp", "0006_toread"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='file',
-            name='favorites',
-            field=models.ManyToManyField(blank=True, default=None, related_name='favorites', to=settings.AUTH_USER_MODEL),
+            model_name="file",
+            name="favorites",
+            field=models.ManyToManyField(
+                blank=True,
+                default=None,
+                related_name="favorites",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.DeleteModel(
-            name='Toread',
+            name="Toread",
         ),
     ]

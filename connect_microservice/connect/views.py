@@ -5,6 +5,8 @@ from django.http import JsonResponse
 import json
 from .encoder import Show_profileEncoder
 from django.views.decorators.http import require_http_methods
+
+
 # Create your views here.
 # @login_required
 @require_http_methods(["GET", "DELETE", "PUT"])
@@ -12,10 +14,13 @@ def show_profile(request):
     if request.method == "GET":
         profile = Profile.objects.get(name="gabby")
         return JsonResponse(
-            {"profile":profile,
-             "paper":profile.paper.import_href.__str__(),
-             "picture":profile.picture
-                }, encoder=Show_profileEncoder, safe=False
+            {
+                "profile": profile,
+                "paper": profile.paper.import_href.__str__(),
+                "picture": profile.picture,
+            },
+            encoder=Show_profileEncoder,
+            safe=False,
         )
     elif request.method == "DELETE":
         count, _ = Profile.objects.filter(name=request.user).delete()
@@ -24,14 +29,12 @@ def show_profile(request):
         content = json.loads(request.body)
         Profile.objects.filter(id=id).update(**content)
         posts = Profile.objects.get(id=id)
-        
+
         return JsonResponse(
             posts,
             encoder=Show_profileEncoder,
             safe=False,
         )
-
-
 
         # profile= Profile.objects.get(name=request.user)
         # friends= Friend.objects.all()
@@ -42,7 +45,8 @@ def show_profile(request):
         #     "collabs":collabs,
         # }
         # return render(request,"pages/profile.html", context)
-    
+
+
 # def show_friends(request):
 #     if request.method == "GET":
 #         friends= Friend.objects.all()
@@ -50,5 +54,3 @@ def show_profile(request):
 #             "friends": friends,
 #         }
 #         return render(request,"pages/profile.html", context)
-    
-    

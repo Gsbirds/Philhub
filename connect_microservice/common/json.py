@@ -8,6 +8,7 @@ import json
 from django.core import serializers
 from django.contrib.auth.models import User
 
+
 class DateEncoder(JSONEncoder):
     def default(self, o):
         if isinstance(o, datetime):
@@ -26,17 +27,18 @@ class QuerySetEncoder(JSONEncoder):
 
 
 class JsonEncoder(DjangoJSONEncoder):
-
     def default(self, obj):
         if isinstance(obj, models.Model):
             return model_to_dict(obj)
         if isinstance(obj, QuerySet):
-            return serializers.serialize('python', obj, ensure_ascii=False)
+            return serializers.serialize("python", obj, ensure_ascii=False)
         return super(JsonEncoder, self).default(obj)
+
     def json_encode(user):
-        user= User.objects.all()
-        return json.dumps(user, cls=JsonEncoder, indent=2, separators=(',', ': '))
-    
+        user = User.objects.all()
+        return json.dumps(user, cls=JsonEncoder, indent=2, separators=(",", ": "))
+
+
 class ModelEncoder(DateEncoder, QuerySetEncoder, JSONEncoder):
     encoders = {}
 

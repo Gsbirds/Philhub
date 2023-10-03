@@ -6,16 +6,20 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('myapp', '0003_file'),
+        ("myapp", "0003_file"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='file',
-            name='author',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='file', to=settings.AUTH_USER_MODEL),
+            model_name="file",
+            name="author",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="file",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

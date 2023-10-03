@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('connect', '0003_alter_profile_picture'),
+        ("connect", "0003_alter_profile_picture"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='profile',
-            name='picture',
+            model_name="profile",
+            name="picture",
             field=models.URLField(max_length=500, null=True),
         ),
     ]

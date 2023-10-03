@@ -4,18 +4,28 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('myapp', '0002_work'),
+        ("myapp", "0002_work"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='File',
+            name="File",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=500)),
-                ('filepath', models.FileField(null=True, upload_to='files/', verbose_name='')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=500)),
+                (
+                    "filepath",
+                    models.FileField(null=True, upload_to="files/", verbose_name=""),
+                ),
             ],
         ),
     ]
